@@ -11,7 +11,9 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.pgf.bot.counting.Counting;
 import net.pgf.bot.counting.SetCount;
-
+/*
+ * Version: 1.0.0
+ */
 public class Main extends ListenerAdapter {
 	
 	public static JDA JDA;
