@@ -90,7 +90,7 @@ public class Counting implements EventListener {
 			
 			
 			// Determines if there is a new mode
-			if (r.nextInt(2) == 0)
+			if (r.nextInt(10) == 0)
 			{
 				int newMode = r.nextInt(3);
 				
