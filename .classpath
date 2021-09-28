@@ -7,5 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="E:/github/javalib/JDAPlugin.jar"/>
+	<classpathentry kind="lib" path="E:/github/javalib/json-20210307.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

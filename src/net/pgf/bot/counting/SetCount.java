@@ -10,6 +10,8 @@ public class SetCount implements EventListener {
 	
 	public Counting counting;
 	
+	public String cmd = "setcount";
+	
 	public SetCount(Counting counting)
 	{
 		this.counting = counting;
@@ -21,23 +23,21 @@ public class SetCount implements EventListener {
 		if (!(e instanceof MessageReceivedEvent)) { return; }
 		
 		Message msg = ((MessageReceivedEvent) e).getMessage();
+		if (!Main.checkCountingConditions(cmd, msg, true)) { return; } // Checks for conditions
 		
-		if (Counting.COUNTING_OPT_OUT.contains(msg.getGuild().getId())) { return; } // stops this code from running in opt-out servers
-		if (msg.getAuthor().isBot()) { return; } // bots not allowed ;oo
-		if (!Main.ADMINS.contains(msg.getAuthor().getId())) { return; } // Admins onlyyyy (hard coded in Main, doesn't use guild roles)
-		if (!msg.getChannel().getName().equals("counting")) { return; } // #counting only (any guild not on the opt-out list)
+		String potentialNum = msg.getContentRaw().toLowerCase().substring(cmd.length() + 2); // Removes "<prefix>setCount " and just leaves the argument
 		
-		String raw = msg.getContentRaw();
-		
-		if (!raw.toLowerCase().substring(0, 10).equals(Main.PREFIX + "setcount ")) { return; } // If it doesn't start with "<prefix>setCount "
-		
-		String potentialNum = raw.toLowerCase().substring(10); // Removes "<prefix>setCount " and just leaves the argument
-		
-		if (!counting.isNumeric(potentialNum)) { return; } // not a number
+		if (!counting.isNumeric(potentialNum)) // not a number
+		{
+			msg.getChannel().sendMessage(":no_entry_sign: Failed to resolve to a type, try again").queue();
+			msg.addReaction("U+1F6AB").queue();
+			
+			return;
+		}
 		
 		counting.count = Integer.valueOf(potentialNum);
 		msg.getChannel().sendMessage(":pencil: Set the count to " + potentialNum + " (" + counting.mode.toString() + ")").queue();
-		
+		msg.addReaction("U+1F4DD").queue();
 	}
 
 }

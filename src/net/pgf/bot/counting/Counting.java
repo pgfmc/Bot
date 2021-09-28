@@ -20,7 +20,7 @@ public class Counting implements EventListener {
 	
 	public enum Mode {
 		Normal,
-		Doubles,
+		Twos,
 		Reverse
 	};
 	
@@ -37,7 +37,7 @@ public class Counting implements EventListener {
 			return count + 1;
 		}
 		
-		if (mode == Mode.Doubles)
+		if (mode == Mode.Twos)
 		{
 			return count + 2;
 		}
@@ -104,11 +104,11 @@ public class Counting implements EventListener {
 				}
 				if (newMode == 1)
 				{
-					if (mode != Mode.Doubles)
+					if (mode != Mode.Twos)
 					{
 						msg.getChannel().sendMessage("Mode is now Doubles").queue();
 					}
-					mode = Mode.Doubles;
+					mode = Mode.Twos;
 				}
 				if (newMode == 2)
 				{
@@ -125,7 +125,7 @@ public class Counting implements EventListener {
 			{
 				msg.addReaction("U+1F522").queue();
 			}
-			if (mode == Mode.Doubles)
+			if (mode == Mode.Twos)
 			{
 				msg.addReaction("U+0032 U+FE0F U+20E3").queue();
 			}
