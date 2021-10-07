@@ -60,7 +60,7 @@ public class Loader {
 	{
 		FileReader fileReader = new FileReader(file);
 		
-		fileReader.
+		//fileReader.
 	}
 
 }
