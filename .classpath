@@ -6,7 +6,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/ProgramData/.eclipse extras/plugins/JDAPlugin.jar"/>
-	<classpathentry kind="lib" path="C:/ProgramData/.eclipse extras/plugins/json-20210307.jar"/>
+	<classpathentry kind="lib" path="C:/ProgramData/.eclipse extras/libraries/JDAPlugin.jar"/>
+	<classpathentry kind="lib" path="C:/ProgramData/.eclipse extras/libraries/json-20210307.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
