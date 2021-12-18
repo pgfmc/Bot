@@ -16,8 +16,8 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.EventListener;
 import net.dv8tion.jda.api.requests.restaction.AuditableRestAction;
 import net.pgfmc.bot.Discord;
+import net.pgfmc.bot.Main;
 import net.pgfmc.core.ChatEvents;
-import net.pgfmc.core.Main;
 import net.pgfmc.core.Mixins;
 import net.pgfmc.core.permissions.Permissions;
 import net.pgfmc.core.permissions.Roles;
@@ -178,8 +178,9 @@ public class DiscordListener implements EventListener {
 				
 				try {
 					EEEE.complete();
-				} finally {
-					System.out.println("delete message failed!");
+				} catch(Exception except) {
+					System.out.println("Message delete failed");
+					except.printStackTrace();
 				}
 			}
 			database.set("delete", null);
