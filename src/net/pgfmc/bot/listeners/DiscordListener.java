@@ -17,7 +17,7 @@ import net.dv8tion.jda.api.hooks.EventListener;
 import net.dv8tion.jda.api.requests.restaction.AuditableRestAction;
 import net.pgfmc.bot.Discord;
 import net.pgfmc.bot.Main;
-import net.pgfmc.core.ChatEvents;
+import net.pgfmc.bot.player.ChatEvents;
 import net.pgfmc.core.Mixins;
 import net.pgfmc.core.permissions.Permissions;
 import net.pgfmc.core.permissions.Roles;

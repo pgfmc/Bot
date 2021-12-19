@@ -10,6 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import net.pgfmc.bot.cmd.LinkCommand;
 import net.pgfmc.bot.cmd.UnlinkCommand;
+import net.pgfmc.bot.player.ChatEvents;
 
 public class Main extends JavaPlugin {
 	
@@ -24,6 +25,7 @@ public class Main extends JavaPlugin {
 		plugin = this;
 		configPath = plugin.getDataFolder() + File.separator + "config.yml";
 		
+		getServer().getPluginManager().registerEvents(new ChatEvents(), this);
 		
 		getCommand("link").setExecutor(new LinkCommand());
 		getCommand("unlink").setExecutor(new UnlinkCommand());

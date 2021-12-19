@@ -55,7 +55,6 @@ public class Discord extends ListenerAdapter {
 		}
 		serverChannel.sendMessage(m).queue();
 		System.out.println("Discord: " + m);
-		
 	}
 	
 	public static void setChannel(TextChannel server) {
