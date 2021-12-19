@@ -1,15 +1,12 @@
 package net.pgfmc.bot.listeners;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import org.bukkit.Bukkit;
-import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import net.dv8tion.jda.api.entities.ChannelType;
-import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.GenericEvent;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -26,7 +23,7 @@ import net.pgfmc.core.playerdataAPI.PlayerData;
 
 public class DiscordListener implements EventListener {
 
-	@SuppressWarnings("unchecked")
+	//@SuppressWarnings("unchecked")
 	@Override
 	public void onEvent(GenericEvent e) {
 		
@@ -43,6 +40,8 @@ public class DiscordListener implements EventListener {
 				if (s.length() == 0) {return;}
 				
 				Role r = Role.getDominantOf(m.getMember().getRoles().stream().map(x -> x.getId()).collect(Collectors.toList()));
+				
+				/*
 				Guild g = Discord.JDA.getGuildById("579055447437475851");
 				if (g.isMember(m.getAuthor())
 						&& Role.getDominantOf(g.getMember(m.getAuthor())
@@ -66,7 +65,7 @@ public class DiscordListener implements EventListener {
 						Bukkit.dispatchCommand(Bukkit.getConsoleSender(), s.replace("!!", ""));
 						return;
 					}
-				}
+				}*/
 				
 				s.replace("%", ""); // removes all "%"s from the message.
 				

@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.Random;
 import java.util.function.Consumer;
 
+import javax.security.auth.login.LoginException;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -33,6 +35,15 @@ public class Main extends JavaPlugin {
 		
 		getCommand("link").setExecutor(new LinkCommand());
 		getCommand("unlink").setExecutor(new UnlinkCommand());
+		
+		// Tries to initialize discord integration
+		try {
+			Discord.initialize();
+		} catch (LoginException e1) {
+			e1.printStackTrace();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}		
 	}
 	
 	@Override
