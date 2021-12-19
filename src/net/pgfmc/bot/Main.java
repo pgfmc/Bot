@@ -11,6 +11,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import net.pgfmc.bot.cmd.LinkCommand;
 import net.pgfmc.bot.cmd.UnlinkCommand;
 import net.pgfmc.bot.player.ChatEvents;
+import net.pgfmc.bot.player.Roles;
+import net.pgfmc.core.playerdataAPI.PlayerDataManager;
 
 public class Main extends JavaPlugin {
 	
@@ -24,6 +26,8 @@ public class Main extends JavaPlugin {
 	{
 		plugin = this;
 		configPath = plugin.getDataFolder() + File.separator + "config.yml";
+		
+		PlayerDataManager.setInit(x -> Roles.recalculateRoles(x));
 		
 		getServer().getPluginManager().registerEvents(new ChatEvents(), this);
 		

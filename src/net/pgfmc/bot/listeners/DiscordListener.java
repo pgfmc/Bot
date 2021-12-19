@@ -18,10 +18,10 @@ import net.dv8tion.jda.api.requests.restaction.AuditableRestAction;
 import net.pgfmc.bot.Discord;
 import net.pgfmc.bot.Main;
 import net.pgfmc.bot.player.ChatEvents;
+import net.pgfmc.bot.player.Roles;
 import net.pgfmc.core.Mixins;
 import net.pgfmc.core.permissions.Permissions;
-import net.pgfmc.core.permissions.Roles;
-import net.pgfmc.core.permissions.Roles.Role;
+import net.pgfmc.core.permissions.Role;
 import net.pgfmc.core.playerdataAPI.PlayerData;
 
 public class DiscordListener implements EventListener {

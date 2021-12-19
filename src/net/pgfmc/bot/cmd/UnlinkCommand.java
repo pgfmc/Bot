@@ -6,8 +6,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import net.pgfmc.bot.player.Roles;
 import net.pgfmc.core.permissions.Permissions;
-import net.pgfmc.core.permissions.Roles;
 import net.pgfmc.core.playerdataAPI.PlayerData;
 
 public class UnlinkCommand implements CommandExecutor {
