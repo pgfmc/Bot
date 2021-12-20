@@ -15,11 +15,9 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.server.BroadcastMessageEvent;
 
 import net.pgfmc.bot.Discord;
 import net.pgfmc.bot.Main;
-import net.pgfmc.core.cmd.donator.Nick;
 import net.pgfmc.core.playerdataAPI.PlayerData;
 
 /**
@@ -101,12 +99,14 @@ public class ChatEvents implements Listener {
 		}
 	}
 	
+	/* XXX Broadcasts unwanted things, is supposed to just be for /bc
 	@EventHandler
 	public void onBroadcast(BroadcastMessageEvent e)
 	{
 		Discord.sendMessage("[PGF] " + Nick.removeCodes(e.getMessage()));
 		e.setMessage("§7§l[§5PGF§7] §r§r" + e.getMessage().replace("&", "§"));
 	}
+	*/
 	
 	public static String getMessageColor(String sender) {
 		
