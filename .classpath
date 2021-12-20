@@ -17,6 +17,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="E:/github/javaLib/PGF-Core.jar" sourcepath="/PGF-Core"/>
 	<classpathentry kind="lib" path="E:/github/javaLib/PGF-Survival.jar"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/JDA-4.30"/>
+	<classpathentry kind="lib" path="E:/github/javalib/JDAplugin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
