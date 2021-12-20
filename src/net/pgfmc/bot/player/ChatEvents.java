@@ -19,7 +19,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import net.pgfmc.bot.Discord;
 import net.pgfmc.bot.Main;
 import net.pgfmc.core.playerdataAPI.PlayerData;
-import net.pgfmc.survival.cmd.home.SetHome;
 
 /**
  * Makes all the chat colorful :)
@@ -37,16 +36,6 @@ public class ChatEvents implements Listener {
 	public void onMessage(AsyncPlayerChatEvent e)
 	{
 		PlayerData pd = PlayerData.getPlayerData(e.getPlayer());
-		
-		// For homes
-		if (pd.getData("tempHomeLocation") != null) {
-			
-			e.setCancelled(true);
-			SetHome.setHome(pd.getPlayer(), e.getMessage(), pd.getData("tempHomeLocation"));
-			pd.setData("tempHomeLocation", null);
-			
-			return;
-		}
 		
 		e.setFormat(pd.getRankedName() + "§8 -> " + getMessageColor(e.getPlayer().getUniqueId().toString()) + e.getMessage());
 		
