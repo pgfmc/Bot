@@ -14,9 +14,11 @@ public class OnUpdateRole implements EventListener {
 	@Override
 	public void onEvent(GenericEvent e) {
 		
-		if (!(e instanceof GuildMemberRoleAddEvent || e instanceof GuildMemberRoleRemoveEvent)) { return; }
+		if (!(e instanceof GuildMemberRoleAddEvent || e instanceof GuildMemberRoleRemoveEvent)) return;
+		if (!"579055447437475851".equals(((GenericGuildMemberEvent) e).getGuild().getId())) return;
 		
 		PlayerData pd = PlayerData.getPlayerDataById(((GenericGuildMemberEvent) e).getMember().getId());
+		if (pd == null) return;
 		
 		Roles.recalculateRoles(pd);
 		Permissions.recalcPerms(pd);
