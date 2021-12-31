@@ -14,7 +14,9 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
-import net.pgfmc.bot.listeners.DiscordListener;
+import net.pgfmc.bot.listeners.OnMessageReceived;
+import net.pgfmc.bot.listeners.OnReady;
+import net.pgfmc.bot.listeners.OnUpdateRole;
 
 public class Discord extends ListenerAdapter {
 	
@@ -37,8 +39,17 @@ public class Discord extends ListenerAdapter {
 	
 	public static void initialize() throws LoginException, InterruptedException {
 		JDABuilder builder = JDABuilder.createDefault(Secret.getKey()); // bot token, don't share.
+		/*
+		 * Register EventListeners here ---
+		 */
 		
-		builder.addEventListeners(new DiscordListener());
+		builder.addEventListeners(new OnMessageReceived());
+		builder.addEventListeners(new OnReady());
+		builder.addEventListeners(new OnUpdateRole());
+		
+		/*
+		 * 
+		 */
 		
 		// creates JDA and allows the bot to load all members 
 		JDA = builder
