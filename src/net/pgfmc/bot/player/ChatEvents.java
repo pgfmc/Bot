@@ -14,6 +14,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import net.pgfmc.bot.Discord;
@@ -55,6 +56,12 @@ public class ChatEvents implements Listener {
 		e.setJoinMessage("§7[§a+§7]§r " + pd.getNickname());
 		Discord.sendMessage("<:JOIN:905023714213625886> " + pd.getNicknameRaw());
 		//Discord.sendEmbed(Discord.simplePlayerEmbed(pd.getPlayer(), "joined the server", Discord.green));
+	}
+	
+	@EventHandler
+	public void onLogin(PlayerLoginEvent e)
+	{
+		Roles.recalculateRoles(PlayerData.getPlayerData(e.getPlayer()));
 	}
 	
 	@EventHandler

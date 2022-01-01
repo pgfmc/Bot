@@ -1,7 +1,6 @@
 package net.pgfmc.bot.listeners;
 
 import java.io.IOException;
-import java.util.stream.Collectors;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -15,8 +14,7 @@ import net.pgfmc.bot.Main;
 import net.pgfmc.bot.player.ChatEvents;
 import net.pgfmc.bot.player.Roles;
 import net.pgfmc.core.Mixins;
-import net.pgfmc.core.permissions.Permissions;
-import net.pgfmc.core.permissions.Role;
+import net.pgfmc.core.permissions.PermissionsManager;
 import net.pgfmc.core.playerdataAPI.PlayerData;
 
 public class OnMessageReceived implements EventListener {
@@ -34,7 +32,8 @@ public class OnMessageReceived implements EventListener {
 			String s = m.getMessage().getContentDisplay();
 			if (s.length() == 0) {return;}
 			
-			Role r = Role.getDominantOf(m.getMember().getRoles().stream().map(x -> x.getId()).collect(Collectors.toList()));
+			// Role positions in list are guarenteed to be ordered by JDA, index 0 is top Role
+			String r = m.getMember().getRoles().get(0).getName();
 			
 			/*
 			Guild g = Discord.JDA.getGuildById("579055447437475851");
@@ -70,7 +69,7 @@ public class OnMessageReceived implements EventListener {
 			s = format(s, "\\*", "§o");
 			s = format(s, "__", "§n");
 			
-			Bukkit.getServer().broadcastMessage(r.getColorCode() + m.getMember().getEffectiveName() + " §r§8-|| " + ChatEvents.getMessageColor(m.getMember().getId()) + s);
+			Bukkit.getServer().broadcastMessage(PermissionsManager.getRolePrefix(r) + m.getMember().getEffectiveName() + " §r§8-|| " + ChatEvents.getMessageColor(m.getMember().getId()) + s);
 			return;
 			
 		} else 
@@ -109,7 +108,7 @@ public class OnMessageReceived implements EventListener {
 				m.getChannel().sendMessage("Your Discord account has been linked to " + codeMatch.getName() + ".").queue();
 				
 				Roles.recalculateRoles(codeMatch);
-				Permissions.recalcPerms(codeMatch);
+				PermissionsManager.recalcPerms(codeMatch);
 				codeMatch.sendMessage("§aYour roles have been updated!");
 				return;
 			}

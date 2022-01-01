@@ -14,6 +14,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
+import net.pgfmc.bot.listeners.OnDiscordJoin;
 import net.pgfmc.bot.listeners.OnMessageReceived;
 import net.pgfmc.bot.listeners.OnReady;
 import net.pgfmc.bot.listeners.OnUpdateRole;
@@ -37,6 +38,10 @@ public class Discord extends ListenerAdapter {
 	public static final String STOP_MESSAGE = "<:STOP:905683316844429312> Server is stopping...";
 	/// public static final MessageEmbed STOP_MESSAGE = simpleServerEmbed("Server is stopping...", "https://cdn.discordapp.com/emojis/905683316844429312.png?size=44", red);
 	
+	
+	
+	
+	
 	public static void initialize() throws LoginException, InterruptedException {
 		JDABuilder builder = JDABuilder.createDefault(Secret.getKey()); // bot token, don't share.
 		/*
@@ -46,6 +51,7 @@ public class Discord extends ListenerAdapter {
 		builder.addEventListeners(new OnMessageReceived());
 		builder.addEventListeners(new OnReady());
 		builder.addEventListeners(new OnUpdateRole());
+		builder.addEventListeners(new OnDiscordJoin());
 		
 		/*
 		 * 
