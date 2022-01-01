@@ -10,7 +10,7 @@ import net.dv8tion.jda.api.hooks.EventListener;
 import net.dv8tion.jda.api.requests.restaction.AuditableRestAction;
 import net.pgfmc.bot.Discord;
 import net.pgfmc.bot.Main;
-import net.pgfmc.core.Mixins;
+import net.pgfmc.core.misc.Mixins;
 
 public class OnReady implements EventListener {
 

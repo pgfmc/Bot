@@ -7,8 +7,8 @@ import java.util.Optional;
 
 import net.pgfmc.bot.Discord;
 import net.pgfmc.bot.Main;
-import net.pgfmc.core.Mixins;
 import net.pgfmc.core.configify.Configify;
+import net.pgfmc.core.misc.Mixins;
 import net.pgfmc.core.playerdataAPI.PlayerData;
 
 public class Roles extends Configify {

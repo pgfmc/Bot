@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.events.guild.member.GuildMemberRoleAddEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRoleRemoveEvent;
 import net.dv8tion.jda.api.hooks.EventListener;
 import net.pgfmc.bot.player.Roles;
-import net.pgfmc.core.permissions.PermissionsManager;
+import net.pgfmc.core.playerdataAPI.PermissionsManager;
 import net.pgfmc.core.playerdataAPI.PlayerData;
 
 public class OnUpdateRole implements EventListener {

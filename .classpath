@@ -18,5 +18,6 @@
 	<classpathentry kind="lib" path="E:/github/javaLib/Core.jar" sourcepath="/Core"/>
 	<classpathentry kind="lib" path="E:/github/javaLib/Survival.jar"/>
 	<classpathentry kind="lib" path="E:/github/javaLib/External Dependencies/JDAplugin.jar"/>
+	<classpathentry kind="src" path="/Core"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

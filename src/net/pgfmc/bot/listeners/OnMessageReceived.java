@@ -13,8 +13,8 @@ import net.pgfmc.bot.Discord;
 import net.pgfmc.bot.Main;
 import net.pgfmc.bot.player.ChatEvents;
 import net.pgfmc.bot.player.Roles;
-import net.pgfmc.core.Mixins;
-import net.pgfmc.core.permissions.PermissionsManager;
+import net.pgfmc.core.misc.Mixins;
+import net.pgfmc.core.playerdataAPI.PermissionsManager;
 import net.pgfmc.core.playerdataAPI.PlayerData;
 
 public class OnMessageReceived implements EventListener {

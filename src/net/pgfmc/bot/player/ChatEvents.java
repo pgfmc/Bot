@@ -38,7 +38,7 @@ public class ChatEvents implements Listener {
 	{
 		PlayerData pd = PlayerData.getPlayerData(e.getPlayer());
 		
-		e.setFormat(pd.getNickname() + "§8 -> " + getMessageColor(e.getPlayer().getUniqueId().toString()) + e.getMessage());
+		e.setFormat(pd.getRankedName() + "§8 -> " + getMessageColor(e.getPlayer().getUniqueId().toString()) + e.getMessage());
 		
 		Discord.sendMessage(pd.getNicknameRaw() + " -> " + e.getMessage());
 		// System.out.println(pd.getNickname(true));
@@ -49,11 +49,7 @@ public class ChatEvents implements Listener {
 	{
 		PlayerData pd = PlayerData.getPlayerData(e.getPlayer());
 		
-		if (pd == null) {
-			pd = new PlayerData(e.getPlayer());
-		}
-		
-		e.setJoinMessage("§7[§a+§7]§r " + pd.getNickname());
+		e.setJoinMessage("§7[§a+§7]§r " + pd.getRankedName());
 		Discord.sendMessage("<:JOIN:905023714213625886> " + pd.getNicknameRaw());
 		//Discord.sendEmbed(Discord.simplePlayerEmbed(pd.getPlayer(), "joined the server", Discord.green));
 	}
@@ -69,7 +65,7 @@ public class ChatEvents implements Listener {
 	{
 		Player p = e.getPlayer();
 		
-		e.setQuitMessage("§7[§c-§7]§r " + PlayerData.getPlayerData(p).getNickname());
+		e.setQuitMessage("§7[§c-§7]§r " + PlayerData.getPlayerData(p).getRankedName());
 		Discord.sendMessage("<:LEAVE:905682349239463957> " + PlayerData.getPlayerData(p).getNicknameRaw());
 		//Discord.sendEmbed(Discord.simplePlayerEmbed(p, "left the server", Discord.red));
 	}
@@ -81,7 +77,7 @@ public class ChatEvents implements Listener {
 		String inDiscord = e.getDeathMessage().toString(); // ??? lololo
 		inDiscord.replace(pd.getName(), pd.getNicknameRaw());
 		
-		e.setDeathMessage(e.getDeathMessage().replace(pd.getName(), pd.getNickname()));
+		e.setDeathMessage(e.getDeathMessage().replace(pd.getName(), pd.getRankedName()));
 		
 		Discord.sendMessage("<:DEATH:907865162558636072> " + inDiscord);
 		//Discord.sendEmbed(Discord.simpleServerEmbed(e.getDeathMessage(), "https://cdn.discordapp.com/emojis/907865162558636072.png?size=44", Discord.black));
