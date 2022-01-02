@@ -14,7 +14,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import net.pgfmc.bot.Discord;
@@ -40,7 +39,7 @@ public class ChatEvents implements Listener {
 		
 		e.setFormat(pd.getRankedName() + "§8 -> " + getMessageColor(e.getPlayer().getUniqueId().toString()) + e.getMessage());
 		
-		Discord.sendMessage(pd.getNicknameRaw() + " -> " + e.getMessage());
+		Discord.sendMessage(pd.getRankedName() + " -> " + e.getMessage());
 		// System.out.println(pd.getNickname(true));
 	}
 	
@@ -49,15 +48,13 @@ public class ChatEvents implements Listener {
 	{
 		PlayerData pd = PlayerData.getPlayerData(e.getPlayer());
 		
+		if (pd == null) {
+			pd = new PlayerData(e.getPlayer());
+		}
+		
 		e.setJoinMessage("§7[§a+§7]§r " + pd.getRankedName());
-		Discord.sendMessage("<:JOIN:905023714213625886> " + pd.getNicknameRaw());
+		Discord.sendMessage("<:JOIN:905023714213625886> " + pd.getRankedName());
 		//Discord.sendEmbed(Discord.simplePlayerEmbed(pd.getPlayer(), "joined the server", Discord.green));
-	}
-	
-	@EventHandler
-	public void onLogin(PlayerLoginEvent e)
-	{
-		Roles.recalculateRoles(PlayerData.getPlayerData(e.getPlayer()));
 	}
 	
 	@EventHandler
@@ -66,7 +63,7 @@ public class ChatEvents implements Listener {
 		Player p = e.getPlayer();
 		
 		e.setQuitMessage("§7[§c-§7]§r " + PlayerData.getPlayerData(p).getRankedName());
-		Discord.sendMessage("<:LEAVE:905682349239463957> " + PlayerData.getPlayerData(p).getNicknameRaw());
+		Discord.sendMessage("<:LEAVE:905682349239463957> " + PlayerData.getPlayerData(p).getRankedName());
 		//Discord.sendEmbed(Discord.simplePlayerEmbed(p, "left the server", Discord.red));
 	}
 	
@@ -75,7 +72,7 @@ public class ChatEvents implements Listener {
 		PlayerData pd = PlayerData.getPlayerData(e.getEntity());
 		
 		String inDiscord = e.getDeathMessage().toString(); // ??? lololo
-		inDiscord.replace(pd.getName(), pd.getNicknameRaw());
+		inDiscord.replace(pd.getName(), pd.getRankedName());
 		
 		e.setDeathMessage(e.getDeathMessage().replace(pd.getName(), pd.getRankedName()));
 		
@@ -95,7 +92,7 @@ public class ChatEvents implements Listener {
 		if (adv.contains(" has made the advancement "))
 		{
 			adv = adv.substring(adv.lastIndexOf(pd.getName()), adv.length());
-			adv.replace(pd.getName(), pd.getNicknameRaw());
+			adv.replace(pd.getName(), pd.getRankedName());
 			
 			Discord.sendMessage(adv);
 			System.out.println("Advancement Get!"); // DO NOT REMOVE THIS!!!!!!!!!!!!!!!! (IT BREAKS) XXX lol

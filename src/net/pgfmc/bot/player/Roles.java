@@ -1,19 +1,20 @@
 package net.pgfmc.bot.player;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 import net.pgfmc.bot.Discord;
-import net.pgfmc.bot.Main;
-import net.pgfmc.core.configify.Configify;
-import net.pgfmc.core.misc.Mixins;
+import net.pgfmc.core.permissions.Role;
 import net.pgfmc.core.playerdataAPI.PlayerData;
 
-public class Roles extends Configify {
+public class Roles {
 	
-	public static String defaultRoleId = "0";
+	private static List<Role> getDefault() {
+		List<Role> r = new ArrayList<>(1);
+		r.add(Role.MEMBER);
+		return r;
+	}
 	
 	public static void recalculateRoles(PlayerData pd) {
 		
@@ -22,18 +23,11 @@ public class Roles extends Configify {
 		if (discordo != null) {
 			pd.setData("Discord", discordo);
 			
-			List<String> roles = new ArrayList<String>();
-			Discord.JDA.getGuildById("579055447437475851").getMemberById(discordo).getRoles().forEach(r -> roles.add(r.getName()));
-			
-			pd.setData("Roles", roles);
+			List<Role> list = Role.getRoles(Discord.JDA.getGuildById("579055447437475851").getMemberById(discordo).getRoles().stream().map(x -> x.getId()).collect(Collectors.toList()));
+			pd.setData("Roles", list);
 			
 		} else {
-			pd.setData("Roles", Arrays.asList(Discord.JDA.getRoleById(defaultRoleId)));
+			pd.setData("Roles", getDefault());
 		}
-	}
-
-	@Override
-	public void reload() {
-		Optional.ofNullable(Mixins.getDatabase(Main.configPath).getString("defaultRoleId")).orElse("579062298526875648");
 	}
 }
