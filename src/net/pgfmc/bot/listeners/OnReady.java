@@ -32,6 +32,7 @@ public class OnReady implements EventListener {
 			database.set("channel", "771247931005206579");
 		}
 		Discord.setChannel(Discord.JDA.getTextChannelById(Discord.SERVER_CHANNEL));
+		Discord.PGF_GUILD = Discord.JDA.getGuildById("579055447437475851");
 		
 		if (database.getString("delete") != null) { // deletes the "server stopping" message.
 			AuditableRestAction<Void> EEEE = Discord.getChannel().deleteMessageById(database.getString("delete"));

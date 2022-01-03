@@ -34,7 +34,15 @@ public class OnMessageReceived implements EventListener {
 			String s = m.getMessage().getContentDisplay();
 			if (s.length() == 0) {return;}
 			
-			Role r = Role.getDominantOf(m.getMember().getRoles().stream().map(x -> x.getId()).collect(Collectors.toList()));
+			Role r = Role.MEMBER;
+			// If member of PGF (mainly for BTS/outside PGF server)
+			if (Discord.PGF_GUILD.isMember(m.getAuthor()))
+			{
+				r = Role.getDominantOf(Discord.PGF_GUILD.getMember(m.getAuthor()).getRoles().stream().map(x -> x.getId()).collect(Collectors.toList()));
+			}
+			
+			
+			
 			
 			/*
 			Guild g = Discord.JDA.getGuildById("579055447437475851");

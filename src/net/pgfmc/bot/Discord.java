@@ -9,6 +9,7 @@ import javax.security.auth.login.LoginException;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -24,6 +25,8 @@ public class Discord extends ListenerAdapter {
 	public static String PREFIX = "!";
 	public static List<String> ADMINS = new ArrayList<>(Arrays.asList("243499063838769152", "440726027405361152")); // bk, Crimson
 	private static TextChannel serverChannel;
+	
+	public static Guild PGF_GUILD;
 	
 	// Frequently used colors
 	public static final Color green = new Color(0, 255, 0); // Join

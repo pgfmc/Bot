@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.events.guild.member.GenericGuildMemberEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRoleAddEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRoleRemoveEvent;
 import net.dv8tion.jda.api.hooks.EventListener;
+import net.pgfmc.bot.Discord;
 import net.pgfmc.bot.player.Roles;
 import net.pgfmc.core.permissions.Permissions;
 import net.pgfmc.core.playerdataAPI.PlayerData;
@@ -15,7 +16,7 @@ public class OnUpdateRole implements EventListener {
 	public void onEvent(GenericEvent e) {
 		
 		if (!(e instanceof GuildMemberRoleAddEvent || e instanceof GuildMemberRoleRemoveEvent)) return;
-		if (!"579055447437475851".equals(((GenericGuildMemberEvent) e).getGuild().getId())) return;
+		if (!((GenericGuildMemberEvent) e).getGuild().equals(Discord.PGF_GUILD)) return;
 		
 		PlayerData pd = PlayerData.getPlayerDataById(((GenericGuildMemberEvent) e).getMember().getId());
 		if (pd == null) return;
