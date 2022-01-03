@@ -62,6 +62,8 @@ public class Main extends JavaPlugin {
 		if (action != null) {
 			action.accept(null);
 		}
+		
+		Discord.JDA.shutdown();
 	}
 
 }
