@@ -55,6 +55,7 @@ public class OnReady implements EventListener {
 		System.out.println("Discord Bot Initialized!");
 		Discord.sendMessage(Discord.START_MESSAGE);
 		
+		Discord.sendAlert(Discord.START_MESSAGE_EMBED);		
 	}
 	
 	
