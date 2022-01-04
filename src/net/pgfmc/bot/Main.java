@@ -14,6 +14,8 @@ import net.pgfmc.bot.cmd.LinkCommand;
 import net.pgfmc.bot.cmd.UnlinkCommand;
 import net.pgfmc.bot.player.ChatEvents;
 import net.pgfmc.bot.player.Roles;
+import net.pgfmc.core.CoreMain;
+import net.pgfmc.core.CoreMain.Machine;
 import net.pgfmc.core.playerdataAPI.PlayerDataManager;
 
 public class Main extends JavaPlugin {
@@ -59,7 +61,10 @@ public class Main extends JavaPlugin {
 		Discord.sendMessage(msg);
 		Discord.sendMessage(Discord.STOP_MESSAGE);
 		
-		Discord.sendAlert(Discord.STOP_MESSAGE_EMBED);
+		if (CoreMain.machine == Machine.MAIN)
+		{
+			Discord.sendAlert(Discord.STOP_MESSAGE_EMBED);
+		}
 		
 		if (action != null) {
 			action.accept(null);
