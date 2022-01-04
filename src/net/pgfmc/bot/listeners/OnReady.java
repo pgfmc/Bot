@@ -10,7 +10,9 @@ import net.dv8tion.jda.api.hooks.EventListener;
 import net.dv8tion.jda.api.requests.restaction.AuditableRestAction;
 import net.pgfmc.bot.Discord;
 import net.pgfmc.bot.Main;
+import net.pgfmc.core.CoreMain;
 import net.pgfmc.core.Mixins;
+import net.pgfmc.core.CoreMain.Machine;
 
 public class OnReady implements EventListener {
 
@@ -55,7 +57,11 @@ public class OnReady implements EventListener {
 		System.out.println("Discord Bot Initialized!");
 		Discord.sendMessage(Discord.START_MESSAGE);
 		
-		Discord.sendAlert(Discord.START_MESSAGE_EMBED);		
+		if (CoreMain.machine == Machine.MAIN)
+		{
+			Discord.sendAlert(Discord.START_MESSAGE_EMBED);
+		}
+		
 	}
 	
 	
