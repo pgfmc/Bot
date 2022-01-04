@@ -7,9 +7,13 @@ import java.util.List;
 
 import javax.security.auth.login.LoginException;
 
+import org.bukkit.OfflinePlayer;
+
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -36,9 +40,9 @@ public class Discord extends ListenerAdapter {
 	
 	public static String SERVER_CHANNEL;
 	public static final String START_MESSAGE = "<:START:905682398790959125> Server has started!";
-	//public static final MessageEmbed START_MESSAGE = simpleServerEmbed("Server is starting...", "https://cdn.discordapp.com/emojis/905682398790959125.png?size=44", green);
+	public static final MessageEmbed START_MESSAGE_EMBED = simpleServerEmbed("Server is starting...", "https://cdn.discordapp.com/emojis/905682398790959125.png?size=44", green);
 	public static final String STOP_MESSAGE = "<:STOP:905683316844429312> Server is stopping...";
-	/// public static final MessageEmbed STOP_MESSAGE = simpleServerEmbed("Server is stopping...", "https://cdn.discordapp.com/emojis/905683316844429312.png?size=44", red);
+	public static final MessageEmbed STOP_MESSAGE_EMBED = simpleServerEmbed("Server is stopping...", "https://cdn.discordapp.com/emojis/905683316844429312.png?size=44", red);
 	
 	public static void initialize() throws LoginException, InterruptedException {
 		JDABuilder builder = JDABuilder.createDefault(Secret.getKey()); // bot token, don't share.
@@ -71,6 +75,15 @@ public class Discord extends ListenerAdapter {
 		System.out.println("Discord: " + m);
 	}
 	
+	public static void sendAlert(String m) {
+		if (m == null || m.equals("")) { return; }
+		JDA.getTextChannelById("891939656969621534").sendMessage(m).queue();
+	}
+	public static void sendAlert(MessageEmbed me) {
+		if (me == null) { return; }
+		JDA.getTextChannelById("891939656969621534").sendMessage(me).queue();
+	}
+	
 	public static void setChannel(TextChannel server) {
 		if (serverChannel == null) {
 			serverChannel = server;
@@ -81,13 +94,13 @@ public class Discord extends ListenerAdapter {
 		return serverChannel;
 	}
 	
-	/*
-	@Deprecated
+	
+	
 	public static void sendEmbed(MessageEmbed eb)
 	{
 		serverChannel.sendMessage(eb).queue();
 		// System.out.println("Discord: " + eb.getAuthor().getName());
-	}*/
+	}
 	
 	
 	
@@ -95,7 +108,7 @@ public class Discord extends ListenerAdapter {
 	 * For more complicated embeds, use EmbedBuilder from JDA
 	 * @return
 	 */
-	/*
+	
 	public static MessageEmbed simplePlayerEmbed(OfflinePlayer player, String message, Color color)
 	{
 		EmbedBuilder eb = new EmbedBuilder();
@@ -115,5 +128,5 @@ public class Discord extends ListenerAdapter {
 		eb.setAuthor(message, null, icon);
 		
 		return eb.build();
-	}*/
+	}
 }

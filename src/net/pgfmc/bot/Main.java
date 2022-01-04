@@ -59,6 +59,8 @@ public class Main extends JavaPlugin {
 		Discord.sendMessage(msg);
 		Discord.sendMessage(Discord.STOP_MESSAGE);
 		
+		Discord.sendAlert(Discord.STOP_MESSAGE_EMBED);
+		
 		if (action != null) {
 			action.accept(null);
 		}
