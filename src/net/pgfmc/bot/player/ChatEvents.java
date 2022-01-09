@@ -18,6 +18,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import net.pgfmc.bot.Discord;
 import net.pgfmc.bot.Main;
+import net.pgfmc.core.chat.ProfanityFilter;
 import net.pgfmc.core.playerdataAPI.PlayerData;
 
 /**
@@ -35,11 +36,23 @@ public class ChatEvents implements Listener {
 	@EventHandler
 	public void onMessage(AsyncPlayerChatEvent e)
 	{
-		PlayerData pd = PlayerData.getPlayerData(e.getPlayer());
+		String msg = e.getMessage();
+		Player p = e.getPlayer();
 		
-		e.setFormat(pd.getRankedName() + "§8 -> " + getMessageColor(e.getPlayer().getUniqueId().toString()) + e.getMessage());
+		// If list1 has any values with list 2
+		// Word blacklist
+		if (ProfanityFilter.hasProfanity(msg))
+		{
+			p.sendMessage("§4Please do not use blacklisted words!");
+			e.setCancelled(true);
+			return;
+		}
 		
-		Discord.sendMessage(pd.getNicknameRaw() + " -> " + e.getMessage());
+		PlayerData pd = PlayerData.getPlayerData(p);
+		
+		e.setFormat(pd.getRankedName() + "§8 -> " + getMessageColor(p.getUniqueId().toString()) + msg);
+		
+		Discord.sendMessage(pd.getNicknameRaw() + " -> " + msg);
 	}
 	
 	@EventHandler
