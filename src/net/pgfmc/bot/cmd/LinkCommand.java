@@ -1,14 +1,12 @@
 package net.pgfmc.bot.cmd;
 
-import java.util.LinkedList;
-import java.util.Random;
-
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import net.pgfmc.bot.functions.AccountLinking;
 import net.pgfmc.core.playerdataAPI.PlayerData;
 
 public class LinkCommand implements CommandExecutor {
@@ -34,40 +32,19 @@ public class LinkCommand implements CommandExecutor {
 		pd.sendMessage("§aGenerating code...");
 		Thread thread = new Thread() {
 			public void run() {
-				String code = generateCode();
+				String code = AccountLinking.generateCode();
 				pd.setData("linkCode", code);
-				sender.sendMessage("§6Message the code §f[ " + code + " ] §ato PGF.bot in dms");
-				sender.sendMessage("§ato link your account.");
+				sender.sendMessage("§6Message the code §f[ " + code + " ] §6to §aPGF.bot §6in dms");
+				sender.sendMessage("§6to link your account.");
+				
+				System.out.println("Account linking Thread ended!");
 			}
 		};
 		thread.start();
+		System.out.println("Account linking Thread started!");
 		
 		return true;
 	}
 	
-	/**
-	 * Get a randomly generated 4 digit code that isn't taken
-	 * This should only be accessed through a thread!
-	 * @return The 4 digit unique code
-	 */
-	private static String generateCode()
-	{
-		String code = String.valueOf(new Random().nextInt(9999 - 1000) + 1000);
-		// range is 1000 to 9999
-		LinkedList<String> takenCodes = new LinkedList<>();
-		
-		for (PlayerData pd : PlayerData.getPlayerDataSet())
-		{
-			String tempCode = pd.getData("linkCode");
-			if (tempCode == null || tempCode == "") continue;
-			takenCodes.add(tempCode);
-		}
-		
-		while (!takenCodes.contains(code))
-		{
-			code = String.valueOf(new Random().nextInt(9999 - 1000) + 1000);
-		}
-		
-		return code;
-	}
+	
 }

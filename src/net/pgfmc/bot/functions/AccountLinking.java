@@ -1,5 +1,8 @@
 package net.pgfmc.bot.functions;
 
+import java.util.LinkedList;
+import java.util.Random;
+
 import net.dv8tion.jda.api.entities.User;
 import net.pgfmc.bot.player.Roles;
 import net.pgfmc.core.permissions.Permissions;
@@ -16,10 +19,11 @@ public class AccountLinking {
 	public static boolean linkAsk(String code, User user)
 	{
 		// when a Direct Message is sent to the bot.
-		code = code.strip().substring(0, 3);
+		// 0000 because a shorter message will give error
+		code = (code.strip() + "0000").substring(0, 4);
+		System.out.println("Account linking: Input code is " + code);
 		
 		PlayerData codeMatch = null; // the playerdata that has the code match.
-		
 		boolean taken = false; // wether or not the discord account has been taken.
 		
 		for (PlayerData pd : PlayerData.getPlayerDataSet()) { // sets variables.
@@ -27,8 +31,8 @@ public class AccountLinking {
 			if (pd.getData("linkCode") != null && pd.getData("linkCode").equals(code)) {
 				pd.setData("linkCode", null);
 				codeMatch = pd;
+				System.out.println("Account linking: Found a match");
 			}
-			
 			
 			if (!taken) {
 				taken = (pd.getData("Discord") != null && pd.getData("Discord").equals(user.getId()));
@@ -37,6 +41,7 @@ public class AccountLinking {
 		
 		// Link the account
 		if (codeMatch != null && !taken) {
+			System.out.println("Account linking: Successfully linked (Minecraft)" + codeMatch.getName() + " and (Discord)" + user.getName());
 			link(codeMatch, user.getId());
 			codeMatch.sendMessage("§aYour roles have been updated!");
 			return true;
@@ -56,7 +61,36 @@ public class AccountLinking {
 		pd.setData("Discord", id).save();
 		Roles.recalculateRoles(pd);
 		Permissions.recalcPerms(pd);
-		pd.sendMessage("§aYour roles have been updated!");
+	}
+	
+	/**
+	 * Get a randomly generated 4 digit code that isn't taken
+	 * This should only be accessed through a thread!
+	 * @return The 4 digit unique code
+	 */
+	public static String generateCode()
+	{
+		String code = String.valueOf(new Random().nextInt(9999 - 1000) + 1000);
+		System.out.println("Generating code: Code is " + code);
+		// range is 1000 to 9999
+		LinkedList<String> takenCodes = new LinkedList<>();
+		
+		for (PlayerData pd : PlayerData.getPlayerDataSet())
+		{
+			String tempCode = pd.getData("linkCode");
+			if (tempCode == null || tempCode == "") continue;
+			takenCodes.add(tempCode);
+		}
+		System.out.println("Generating code: Taken codes are " + takenCodes);
+		
+		while (takenCodes.contains(code))
+		{
+			System.out.println("Generating code: Code taken, generating new code");
+			code = String.valueOf(new Random().nextInt(9999 - 1000) + 1000);
+			System.out.println("Generating code: Code is " + code);
+		}
+		
+		return code;
 	}
 
 }
