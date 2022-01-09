@@ -15,26 +15,26 @@ public class UnlinkCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String alias, String[] args) {
 		
-		if (sender instanceof Player) {
-			
-			PlayerData pd = PlayerData.getPlayerData((OfflinePlayer) sender);
-			
-			if (pd.getData("Discord") != null) {
-				
-				pd.setData("Discord", null).save();
-				Roles.recalculateRoles(pd);
-				Permissions.recalcPerms(pd);
-				pd.sendMessage("§cYour Discord account has been unlinked.");
-				return true;
-				
-			} else {
-				
-				pd.sendMessage("§cYou dont have a Discord account to unlink.");
-				return true;
-			}
+		if (!(sender instanceof Player))
+		{
+			sender.sendMessage("§cOnly players can execute this command.");
+			return true;	
 		}
+			
+		PlayerData pd = PlayerData.getPlayerData((OfflinePlayer) sender);
 		
-		sender.sendMessage("§cOnly players can execute this command.");
-		return true;	
+		if (pd.getData("Discord") != null) {
+			
+			pd.setData("Discord", null).save();
+			Roles.recalculateRoles(pd);
+			Permissions.recalcPerms(pd);
+			pd.sendMessage("§cYour Discord account has been unlinked.");
+			return true;
+			
+		} else {
+			
+			pd.sendMessage("§cYou dont have a Discord account to unlink.");
+			return true;
+		}
 	}
 }
