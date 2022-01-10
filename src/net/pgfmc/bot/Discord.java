@@ -50,8 +50,8 @@ public class Discord extends ListenerAdapter {
 		 * Register EventListeners here ---
 		 */
 		
-		builder.addEventListeners(new OnMessageReceived());
 		builder.addEventListeners(new OnReady());
+		builder.addEventListeners(new OnMessageReceived());
 		builder.addEventListeners(new OnUpdateRole());
 		
 		/*
