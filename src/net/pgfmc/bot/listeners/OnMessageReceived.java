@@ -56,19 +56,21 @@ public class OnMessageReceived implements EventListener {
 			s = format(s, "\\*", "§o");
 			s = format(s, "__", "§n");
 			
-
-			if(m.getMessage().getReferencedMessage() == null || m.getMessage().getReferencedMessage().getAuthor().isBot()) {
+			// If not reply
+			if(m.getMessage().getReferencedMessage() == null || m.getMessage().getReferencedMessage().getAuthor().isBot())
+			{
 				Bukkit.getServer().broadcastMessage(r.getColorCode() + m.getMember().getEffectiveName() + " §r§8-|| " + ChatEvents.getMessageColor(m.getMember().getId()) + s);
-			return;
+				return;
 			} else {
                 User replyUser = m.getMessage().getReferencedMessage().getAuthor();
                 Member replyMember = Discord.PGF_GUILD.getMember(replyUser);
                 Role replyRole = Role.MEMBER;
-                // If member of PGF (mainly for BTS/outside PGF server)
+                
                 if (replyMember != null)
                 {
                     replyRole = Role.getDominantOf(replyMember.getRoles().stream().map(x -> x.getId()).collect(Collectors.toList()));
                 }
+                
                 Bukkit.getServer().broadcastMessage(r.getColorCode() + m.getMember().getEffectiveName() + " replied to " + replyRole.getColorCode() + replyMember.getEffectiveName() + " §r§8-|| " + ChatEvents.getMessageColor(m.getMember().getId()) + s);
 			}
 			
