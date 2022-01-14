@@ -28,7 +28,7 @@ public class OnMessageReceived implements EventListener {
 		
 		String s = m.getMessage().getContentDisplay();
 		User user = m.getAuthor();
-		Member memberPGF = Discord.PGF_GUILD.getMember(user);
+		Member memberPGF = Discord.JDA.getGuildById(Discord.PGF_ID).getMember(user);
 		
 		if (s.length() == 0) return;
 		
@@ -63,7 +63,7 @@ public class OnMessageReceived implements EventListener {
 				return;
 			} else {
                 User replyUser = m.getMessage().getReferencedMessage().getAuthor();
-                Member replyMember = Discord.PGF_GUILD.getMember(replyUser);
+                Member replyMember = Discord.JDA.getGuildById(Discord.PGF_ID).getMember(replyUser);
                 Role replyRole = Role.MEMBER;
                 
                 if (replyMember != null)
