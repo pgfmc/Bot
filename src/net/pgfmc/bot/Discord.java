@@ -12,7 +12,6 @@ import org.bukkit.OfflinePlayer;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -30,7 +29,7 @@ public class Discord extends ListenerAdapter {
 	public static List<String> ADMINS = new ArrayList<>(Arrays.asList("243499063838769152", "440726027405361152")); // bk, Crimson
 	private static TextChannel serverChannel;
 	
-	public static Guild PGF_GUILD;
+	public static String PGF_ID = "579055447437475851";
 	
 	// Frequently used colors
 	public static final Color green = new Color(0, 255, 0); // Join

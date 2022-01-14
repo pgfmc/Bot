@@ -16,7 +16,7 @@ public class OnUpdateRole implements EventListener {
 	public void onEvent(GenericEvent e) {
 		
 		if (!(e instanceof GuildMemberRoleAddEvent || e instanceof GuildMemberRoleRemoveEvent)) return;
-		if (!((GenericGuildMemberEvent) e).getGuild().equals(Discord.PGF_GUILD)) return;
+		if (!((GenericGuildMemberEvent) e).getGuild().getId().equals(Discord.PGF_ID)) return;
 		
 		PlayerData pd = PlayerData.getPlayerDataById(((GenericGuildMemberEvent) e).getMember().getId());
 		if (pd == null) return;
